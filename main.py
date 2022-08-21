@@ -7,10 +7,10 @@ pyglet.options["debug_gl"] = False
 import pyglet.gl as gl
 
 vertex_positions = [
-    -0.5,  0.5, 1.0
+    -0.5,  0.5, 1.0,
     -0.5, -0.5, 1.0,
      0.5, -0.5, 1.0,
-     0.5,  0.5, 1.0
+     0.5,  0.5, 1.0,
 ]
 
 indices = [
@@ -55,11 +55,7 @@ class Window(pyglet.window.Window):
         gl.glClearColor(1.0, 0.5, 1.0, 1.0)
         self.clear()
 
-        gl.glDrawElements(
-            gl.GL_TRIANGLES,
-            len(indices),
-            gl.GL_UNSIGNED_INT,
-            None)
+        gl.glDrawElements(gl.GL_TRIANGLES, len(indices), gl.GL_UNSIGNED_INT, None)
 
     def on_resize(self, width, height):
         print(f"resize {width} * {height}")
