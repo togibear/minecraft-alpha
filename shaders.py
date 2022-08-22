@@ -30,7 +30,7 @@ def create_shader(target, source_path):
     log_buffer = ctypes.create_string_buffer(log_length.value)
     gl.glGetShaderInfoLog(target, log_length, None, log_buffer)
 
-    if log_length:
+    if log_length.value > 1:
         raise Shader_Error(str(log_buffer.value))
 
 class Shader:
@@ -54,6 +54,13 @@ class Shader:
     
     def __del__(self):
         gl.glDeleteProgram(self.program)
+
+    def find_uniform(self, name):
+        return gl.glGetUniformLocation(self.program, ctypes.create_string_buffer(name))
+
+    def uniform_matrix(self, location, matrix):
+        gl.glUniformMatrix4fv(location, 1, gl.GL_FALSE, (gl.GLfloat * 16) (*sum(matrix.data, [])))
+
 
     def use(self):
         gl.glUseProgram(self.program)
