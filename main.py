@@ -6,6 +6,8 @@ pyglet.options["debug_gl"] = False
 
 import pyglet.gl as gl
 
+import shaders
+
 vertex_positions = [
     -0.5,  0.5, 1.0,
     -0.5, -0.5, 1.0,
@@ -50,9 +52,13 @@ class Window(pyglet.window.Window):
             (gl.GLuint * len(indices)) (*indices),
             gl.GL_STATIC_DRAW)
 
+        #shader
+        self.shader = shaders.Shader("vert.glsl", "frag.glsl")
+        self.shader.use()
+
 
     def on_draw(self):
-        gl.glClearColor(1.0, 0.5, 1.0, 1.0)
+        gl.glClearColor(0.0, 0.0, 0.0, 1.0)
         self.clear()
 
         gl.glDrawElements(gl.GL_TRIANGLES, len(indices), gl.GL_UNSIGNED_INT, None)
