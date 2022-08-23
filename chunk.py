@@ -101,13 +101,18 @@ class Chunk:
                             self.position[1] + local_y,
                             self.position[2] + local_z)
 
-                        if not self.world.get_block_number((x + 1, y, z)): add_face(0)
-                        if not self.world.get_block_number((x - 1, y, z)): add_face(1)
-                        if not self.world.get_block_number((x, y + 1, z)): add_face(2)
-                        if not self.world.get_block_number((x, y - 1, z)): add_face(3)
-                        if not self.world.get_block_number((x, y, z + 1)): add_face(4)
-                        if not self.world.get_block_number((x, y, z - 1)): add_face(5)
+                        if block_type.is_cube:
+
+                            if not self.world.get_block_number((x + 1, y, z)): add_face(0)
+                            if not self.world.get_block_number((x - 1, y, z)): add_face(1)
+                            if not self.world.get_block_number((x, y + 1, z)): add_face(2)
+                            if not self.world.get_block_number((x, y - 1, z)): add_face(3)
+                            if not self.world.get_block_number((x, y, z + 1)): add_face(4)
+                            if not self.world.get_block_number((x, y, z - 1)): add_face(5)
                         
+                        else:
+                            for i in range(len(block_type.vertex_positions)):
+                                add_face(i)
                         
 
         # pass mesh data to gpu

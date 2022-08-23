@@ -52,7 +52,7 @@ class Window(pyglet.window.Window):
 
         gl.glEnable(gl.GL_DEPTH_TEST)
         gl.glEnable(gl.GL_CULL_FACE)
-        gl.glClearColor(0.0, 0.0, 0.0, 1.0)
+        gl.glClearColor(0.0, 0.0, 0.0, 0.0)
         self.clear()
 
         self.world.draw()

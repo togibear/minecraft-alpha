@@ -1,15 +1,20 @@
-import positions 
+import models.cube
 
 class Block_type:
-	def __init__(self, texture_manager, name = "unknown", block_face_textures = {"all": "cobblestone"}):
+	def __init__(self, texture_manager, name = "unknown", block_face_textures = {"all": "cobblestone"}, model = models.cube):
 		self.name = name
 
+		self.transparent = model.transparent
+		self.is_cube = model.is_cube
 
-		self.vertex_positions = positions.vertex_positions
-		self.tex_coords = positions.tex_coords.copy() 
-		self.shading = positions.shading
+		self.vertex_positions = model.vertex_positions
+		self.tex_coords = model.tex_coords.copy() 
+		self.shading = model.shading
 
 		def set_block_face(face, texture): 
+			if face > len(self.tex_coords) - 1:
+				return
+			
 			self.tex_coords[face] = self.tex_coords[face].copy()
 			
 			for vertex in range(4):
